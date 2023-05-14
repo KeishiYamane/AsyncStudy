@@ -32,6 +32,8 @@ namespace AsyncStudy
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this._TaskBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -63,11 +65,33 @@ namespace AsyncStudy
             this.checkBox1.Text = "checkBox1";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(77, 81);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(137, 23);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "ThreadPool+Invoke";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.ThreadPoolBtn);
+            // 
+            // _TaskBtn
+            // 
+            this._TaskBtn.Location = new System.Drawing.Point(77, 133);
+            this._TaskBtn.Name = "_TaskBtn";
+            this._TaskBtn.Size = new System.Drawing.Size(137, 23);
+            this._TaskBtn.TabIndex = 4;
+            this._TaskBtn.Text = "Task";
+            this._TaskBtn.UseVisualStyleBackColor = true;
+            this._TaskBtn.Click += new System.EventHandler(this.TaskBtn);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this._TaskBtn);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
@@ -83,6 +107,8 @@ namespace AsyncStudy
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button _TaskBtn;
     }
 }
 
