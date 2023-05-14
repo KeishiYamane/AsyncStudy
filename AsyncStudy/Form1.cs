@@ -13,8 +13,8 @@ namespace AsyncStudy
 
         private void ThreadBtn(object sender, EventArgs e)
         {
-            // スレッドを作成し、実行する
-            Thread thread = new Thread(new ThreadStart(DoWork));
+            // スレッドを作成し、実行する 
+            Thread thread = new Thread(DoWork);
             thread.Start();
         }
         private void DoWork()
