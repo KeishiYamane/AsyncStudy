@@ -51,7 +51,7 @@ namespace AsyncStudy
         }
         
         /// <summary>
-        /// 
+        /// async/awaitボタン
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -62,6 +62,47 @@ namespace AsyncStudy
         }
 
 
+        private CancellationTokenSource  _token;
+        /// <summary>
+        /// キャンセルトークンボタン
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        
+        private async void asyncCalncelTokenBtn(object sender, EventArgs e)
+        {
+            try
+            {
+                // トークンインスタンスを作成
+                _token = new CancellationTokenSource();
+                // 2つ目の_token.Tokenはすでにキャンセルトークンが投げられていた場合、Taskが動かずにすぐ止めることができる
+                await Task.Run(() => DoWork4(_token.Token), _token.Token);
+                MessageBox.Show("完了");
+            }
+            catch (OperationCanceledException cancel)
+            {
+                MessageBox.Show("キャンセルされました。");
+            }
+            finally
+            {
+                _token.Dispose();
+                _token = null;
+            }
+        }
+
+
+
+
+
+        /// <summary>
+        /// キャンセルボタン
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CancelBtn(object sender, EventArgs e)
+        {
+            _token?.Cancel();
+        }
 
         /// <summary>
         /// Thread用
@@ -110,6 +151,24 @@ namespace AsyncStudy
             // スレッドで行う処理をここに書く
             for (int i = 0; i <= 10; i++)
             {
+                // UIスレッドで実行する処理をInvokeメソッドを使って指定する
+                this.Invoke((Action)(() =>
+                {
+                    // UIスレッドで実行したい処理をここに書く
+                    label1.Text = i.ToString();
+                }));
+
+                Thread.Sleep(1000);
+            }
+            return true;
+        }
+
+        private bool DoWork4(CancellationToken token)
+        {
+            // スレッドで行う処理をここに書く
+            for (int i = 0; i <= 10; i++)
+            {
+                token.ThrowIfCancellationRequested();
                 // UIスレッドで実行する処理をInvokeメソッドを使って指定する
                 this.Invoke((Action)(() =>
                 {
