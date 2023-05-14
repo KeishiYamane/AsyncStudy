@@ -49,6 +49,17 @@ namespace AsyncStudy
                 // コールバックメソッドを 同期コンテキスト(context)上で実行するように指定
             }, context);
         }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void async_awaitBtn(object sender, EventArgs e)
+        {
+            await Task.Run(() => DoWork());
+            MessageBox.Show("完了");
+        }
 
 
 
